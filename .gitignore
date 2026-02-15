@@ -1,2 +1,12 @@
+# ignore
 
+#env variables
 .env
+# environment
+.venv*
+
+#images
+*.jpg
+
+# pycache results
+*__pycache__*
