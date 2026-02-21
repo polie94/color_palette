@@ -6,17 +6,11 @@ import numpy as np
 
 from functions.cv.color_palettes import *
 
-SEASON_PALETTES = {
-    "autumn": autumn_colors,
-    "spring": spring_colors,
-    "summer": summer_colors,
-    "winter": winter_colors
-} 
-
 class ImagePrep():
     def __init__(self, img:Image):
         self.image = img
-        self.season_palettes = SEASON_PALETTES
+        self.season_palettes = SEASONAL_PALETTES
+        self.subseason_palletes = SUBSEASONAL_PALETTES
 
     @staticmethod
     def _run_segmentation(img) -> dict:
@@ -68,8 +62,12 @@ class ImagePrep():
             palette = self._create_palette_bg(cp)
             palette = palette.resize(mask.size)
             palette.paste(img, (0, 0), mask)
-            palette.save(f"{cp_name}.jpg")
-        
+            palette.save(f"seasonales_output/{cp_name}.jpg")
+        for cp_name, cp in self.subseason_palletes.items():
+            palette = self._create_palette_bg(cp)
+            palette = palette.resize(mask.size)
+            palette.paste(img, (0, 0), mask)
+            palette.save(f"subseasonales_output/{cp_name}.jpg")        
 
 
 
